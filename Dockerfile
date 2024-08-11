@@ -2,6 +2,8 @@
 FROM mcr.microsoft.com/dotnet/aspnet:8.0-alpine3.19 AS base
 WORKDIR /app
 
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
+
 SHELL ["/bin/ash", "-eo", "pipefail", "-c"]
 
 RUN apk update && \
@@ -30,4 +32,4 @@ COPY --from=build /app/publish .
 EXPOSE 8080
 
 # Definir o comando de entrada
-ENTRYPOINT ["dotnet", "API.dll"]  # Ajuste o nome do DLL aqui se necessário
+ENTRYPOINT ["dotnet", "API.dll"]
